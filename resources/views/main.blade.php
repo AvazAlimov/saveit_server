@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-light bg-light fixed-top">
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{ route('/') }}">
             <img src="{{ asset('Resources/Logo.svg') }}" width="100" alt="SaveIt">
@@ -33,18 +33,15 @@
                             {{ \Illuminate\Support\Facades\Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </a>
                         </div>
                     </li>
-                    @endguest
+            @endguest
         </ul>
     </div>
 </nav>
