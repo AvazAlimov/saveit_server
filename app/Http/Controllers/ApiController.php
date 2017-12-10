@@ -10,7 +10,6 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\CategoryResource;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ApiController extends Controller
 {
