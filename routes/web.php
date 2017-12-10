@@ -14,9 +14,11 @@
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
+
 Route::get('/', function () {
     return view('main');
 })->name('/');
+
 Route::get('/home', 'WebController@index')->name('home');
 
 Route::get('/market/create', 'WebController@createMarket')->name('market.create');
@@ -30,5 +32,3 @@ Route::post('/category/delete/{id}', 'WebController@deleteCategory')->name('cate
 Route::get('/product/create', 'WebController@createProduct')->name('product.create');
 Route::post('/product/create', 'WebController@createProductSubmit')->name('product.create.submit');
 Route::post('/product/delete/{id}', 'WebController@deleteProduct')->name('product.delete');
-
-Route::get('/home', 'HomeController@index')->name('home');

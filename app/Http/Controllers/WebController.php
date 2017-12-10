@@ -18,7 +18,7 @@ class WebController extends Controller
         $markets = Market::all();
         $products = Product::all();
         /** @noinspection PhpUndefinedMethodInspection */
-        return view('welcome')
+        return view('home')
             ->withMarkets($markets)
             ->withCategories($categories)
             ->withProducts($products);
