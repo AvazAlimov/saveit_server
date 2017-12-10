@@ -16,4 +16,11 @@ class ProductResource extends ResourceCollection
     {
         return $this->collection;
     }
+
+    public function with($request)
+    {
+        return [
+            'status' => 1,
+        ];
+    }
 }

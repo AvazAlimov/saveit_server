@@ -16,4 +16,11 @@ class Category extends Resource
     {
         return $this->resource;
     }
+
+    public function with($request)
+    {
+        return [
+            'status' => 1,
+        ];
+    }
 }
