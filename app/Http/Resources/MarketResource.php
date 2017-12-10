@@ -16,4 +16,11 @@ class MarketResource extends ResourceCollection
     {
         return $this->collection;
     }
+
+    public function with($request)
+    {
+        return [
+            'status' => 1,
+        ];
+    }
 }

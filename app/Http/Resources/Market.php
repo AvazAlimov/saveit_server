@@ -15,7 +15,6 @@ class Market extends Resource
     public function toArray($request)
     {
         return [
-            'status' => 1,
             'id' => $this->id,
             'login' => $this->login,
             'password' => $this->password,
@@ -25,6 +24,13 @@ class Market extends Resource
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'image' => $this->image
+        ];
+    }
+
+    public function with($request)
+    {
+        return [
+            'status' => 1,
         ];
     }
 }
