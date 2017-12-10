@@ -14,10 +14,10 @@
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
-Route::get('/main', function () {
+Route::get('/', function () {
     return view('main');
 });
-Route::get('/', 'WebController@index')->name('home');
+Route::get('/home', 'WebController@index')->name('home');
 
 Route::get('/market/create', 'WebController@createMarket')->name('market.create');
 Route::post('/market/create', 'WebController@createMarketSubmit')->name('market.create.submit');
