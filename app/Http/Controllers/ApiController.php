@@ -41,7 +41,7 @@ class ApiController extends Controller
             $market->update(['image' => $filename]);
         }
 
-        return ['message' => 'Market Created Successfully'];
+        return new \App\Http\Resources\Market(Market::find($market->id));
     }
 
     public function categories()
