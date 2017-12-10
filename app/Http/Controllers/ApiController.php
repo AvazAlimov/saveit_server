@@ -10,6 +10,7 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\CategoryResource;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -25,6 +26,19 @@ class ApiController extends Controller
 
     public function marketCreate(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'login' => 'required|max:16',
+            'password' => 'required|max:16',
+            'name' => 'required|max:255',
+            'address' => 'required|max:255',
+            'phone' => 'required|max:19|min:12',
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ]);
+
+        if ($validator->fails())
+            return response()->json(['status' => -1]);
+
         $market = new Market();
         $market->login = $request->login;
         $market->password = bcrypt($request->password);
