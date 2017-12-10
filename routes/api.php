@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/markets', 'ApiController@markets');
 Route::get('/market&id={id}', 'ApiController@market');
+Route::post('/market/create', 'ApiController@marketCreate');
 
 Route::get('/categories', 'ApiController@categories');
 Route::get('/category&id={id}', 'ApiController@category');

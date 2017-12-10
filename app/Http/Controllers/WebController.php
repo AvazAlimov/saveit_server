@@ -24,7 +24,6 @@ class WebController extends Controller
             ->withProducts($products);
     }
 
-
     public function createMarket()
     {
         return view('Market.create');

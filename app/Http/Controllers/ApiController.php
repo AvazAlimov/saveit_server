@@ -2,51 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Http\Resources\CategoryResource;
-use App\Http\Resources\ProductResource;
 use App\Market;
-use App\Http\Resources\MarketResource;
 use App\Product;
+use App\Category;
+use App\Http\Resources\MarketResource;
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\CategoryResource;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ApiController extends Controller
 {
     public function markets()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         return new MarketResource(Market::all());
     }
 
     public function market($id)
     {
-        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-        /** @noinspection PhpUndefinedMethodInspection */
         return new \App\Http\Resources\Market(Market::find($id));
+    }
+
+    public function marketCreate(Request $request)
+    {
+        $market = new Market();
+        $market->login = $request->login;
+        $market->password = bcrypt($request->password);
+        $market->name = $request->name;
+        $market->address = $request->address;
+        $market->phone = $request->phone;
+        $market->latitude = $request->latitude;
+        $market->longitude = $request->longitude;
+        $market->save();
+
+        if ($request->file('image') != null) {
+            $filename = 'market_' . $market->id . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path() . '/Images/', $filename);
+            $market->update(['image' => $filename]);
+        }
+
+        return ['message' => 'Market Created Successfully'];
     }
 
     public function categories()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         return new CategoryResource(Category::all());
     }
 
     public function category($id)
     {
-        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-        /** @noinspection PhpUndefinedMethodInspection */
         return new \App\Http\Resources\Category(Category::find($id));
     }
 
     public function products()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         return new ProductResource(Product::all());
     }
 
     public function product($id)
     {
-        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-        /** @noinspection PhpUndefinedMethodInspection */
         return new \App\Http\Resources\Product(Product::find($id));
     }
 }
