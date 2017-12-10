@@ -24,6 +24,8 @@ Route::post('/market/create', 'ApiController@marketCreate');
 
 Route::get('/categories', 'ApiController@categories');
 Route::get('/category&id={id}', 'ApiController@category');
+Route::post('/category/create', 'ApiController@categoryCreate');
 
 Route::get('/products', 'ApiController@products');
 Route::get('/product&id={id}', 'ApiController@product');
+Route::post('/product/create', 'ApiController@productCreate');

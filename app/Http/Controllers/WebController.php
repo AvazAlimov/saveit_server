@@ -24,6 +24,7 @@ class WebController extends Controller
             ->withProducts($products);
     }
 
+
     public function createMarket()
     {
         return view('Market.create');
@@ -84,13 +85,11 @@ class WebController extends Controller
 
     public function createCategorySubmit(Request $request)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'image' => 'required',
         ]);
 
-        /** @noinspection PhpUndefinedMethodInspection */
         if ($validator->fails()) {
             return redirect()->route('category.create')
                 ->withErrors($validator)
