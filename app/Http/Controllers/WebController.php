@@ -130,13 +130,13 @@ class WebController extends Controller
     public function createProductSubmit(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'expirydate' => 'required',
-            'originalprice' => 'required',
-            'discont' => 'required',
-            'unit' => 'required',
+            'market' => 'required',
             'category' => 'required',
-            'market' => 'required'
+            'name' => 'required|max:255',
+            'date' => 'required',
+            'unit' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -150,16 +150,22 @@ class WebController extends Controller
         }
 
         $product = new Product();
-        $product->name = $request->name;
-        $product->expirydate = $request->expirydate;
-        $product->originalprice = $request->originalprice;
-        $product->discont = $request->discont;
-        $product->unit = $request->unit;
-        $product->category = $request->category;
         $product->market = $request->market;
-        $product->newprice = doubleval($request->originalprice) * (1 - doubleval($request->discont) / 100);
-
+        $product->category = $request->category;
+        $product->name = $request->name;
+        $product->date = $request->date;
+        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->unit = $request->unit;
+        $product->new_price = doubleval($request->price) * (1 - doubleval($request->discount) / 100);
         $product->save();
+
+        if ($request->file('image') != null) {
+            $filename = 'product_' . $product->id . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path() . '/Images/', $filename);
+            $product->update(['image' => $filename]);
+        }
+
         $product->notify(new ProductNotification());
 
         return redirect()->route('home');
@@ -168,6 +174,8 @@ class WebController extends Controller
     public function deleteProduct($id)
     {
         $product = Product::find($id);
+        if ($product->image != null)
+            File::delete(public_path() . '\Images\\' . $product->image);
         $product->delete();
         return redirect()->route('home');
     }

@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 class Product extends Model
 {
     use Notifiable;
+    protected $fillable = ['market', 'category', 'name', 'date', 'price', 'discount', 'unit', 'new_price', 'image'];
 
     public function category()
     {

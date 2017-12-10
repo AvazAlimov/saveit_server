@@ -27,7 +27,7 @@
         </li>
     </ul>
 </div>
-<form class="container" id="form" action="{{ route('product.create.submit') }}" method="post">
+<form class="container" id="form" action="{{ route('product.create.submit') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="row justify-content-center">
         <h2 class="display">Новый продукт</h2>
