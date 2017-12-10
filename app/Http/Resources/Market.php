@@ -14,17 +14,7 @@ class Market extends Resource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'login' => $this->login,
-            'password' => $this->password,
-            'name' => $this->name,
-            'address' => $this->address,
-            'phone' => $this->phone,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
-            'image' => $this->image
-        ];
+        return $this->resource;
     }
 
     public function with($request)
