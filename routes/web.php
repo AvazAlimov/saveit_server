@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', function () {
     return view('main');
-});
+})->name('/');
 Route::get('/home', 'WebController@index')->name('home');
 
 Route::get('/market/create', 'WebController@createMarket')->name('market.create');
